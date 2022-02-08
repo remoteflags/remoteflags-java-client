@@ -1,0 +1,110 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: info@remoteflags.com
+  description: Remote Flags openapi definition. Public readonly API for integration
+    with Remote Flags.
+  license:
+    name: Apache-2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: remoteflags.com
+  title: Remote Flags API
+  version: 1.0.0
+servers:
+- description: Remote Flags API
+  url: https://api.remoteflags.com
+paths:
+  /status/owner/{ownerId}/flag/{flagId}:
+    get:
+      description: Use this operation to get a flag status from remoteflags.
+      operationId: getStatus
+      parameters:
+      - description: OwnerID to fetch status for
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: FlagId to fetch status for
+        explode: false
+        in: path
+        name: flagId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The segment to get status from. Required for multi-segment flags.
+          For single segment flag skip this.
+        explode: true
+        in: query
+        name: segment
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An identifier to be a key to associate the status with. This
+          is used on flag which status you need to be consistent after the first random
+          generated. For always random status behavior skip this.
+        explode: true
+        in: query
+        name: key
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "400":
+          description: Invalid input
+        "500":
+          description: Internal Server error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Ok
+      security:
+      - RemoteFlagsAuthorizer: []
+      summary: Get a flag status.
+      tags:
+      - public
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: https://${stageVariables.url}/status/owner/{ownerId}/flag/{flagId}
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.querystring.key: method.request.querystring.key
+          integration.request.path.ownerId: method.request.path.ownerId
+          integration.request.querystring.segment: method.request.querystring.segment
+          integration.request.path.flagId: method.request.path.flagId
+        passthroughBehavior: when_no_match
+        type: http
+      x-accepts: application/json
+components:
+  schemas:
+    Status:
+      example:
+        value: value
+      properties:
+        value:
+          type: string
+      required:
+      - value
+      type: object
+  securitySchemes:
+    RemoteFlagsAuthorizer:
+      in: header
+      name: authorizationToken
+      type: apiKey
+      x-amazon-apigateway-authtype: custom
+      x-amazon-apigateway-authorizer:
+        type: request
+        identitySource: method.request.header.authorizationToken
+        authorizerUri: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:LAMBDA_FUNCTION/invocations
+        enableSimpleResponses: true
+        authorizerResultTtlInSeconds: 300
+
