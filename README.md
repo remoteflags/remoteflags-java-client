@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.remoteflags</groupId>
   <artifactId>remoteflags-java-client</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.remoteflags:remoteflags-java-client:1.0.1"
+     implementation "com.remoteflags:remoteflags-java-client:1.0.2"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/remoteflags-java-client-1.0.1.jar`
+* `target/remoteflags-java-client-1.0.2.jar`
 * `target/lib/*.jar`
 
 ## Getting Started

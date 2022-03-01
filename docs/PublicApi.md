@@ -75,12 +75,12 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json
+ - **Accept**: text/html, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**400** | Invalid input |  -  |
-**500** | Internal Server error |  -  |
-**200** | Ok |  -  |
+**400** | 400 Invalid input |  -  |
+**500** | 500 Internal Server error |  -  |
+**200** | 200 OK |  -  |
 

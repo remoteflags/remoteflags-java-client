@@ -84,9 +84,9 @@ public class PublicApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 400 </td><td> Invalid input </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal Server error </td><td>  -  </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> 400 Invalid input </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> 500 Internal Server error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> 200 OK </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getStatusCall(String ownerId, String flagId, String segment, String key, final ApiCallback _callback) throws ApiException {
@@ -126,7 +126,7 @@ public class PublicApi {
         }
 
         final String[] localVarAccepts = {
-            "text/plain", "application/json"
+            "text/html", "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -176,9 +176,9 @@ public class PublicApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 400 </td><td> Invalid input </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal Server error </td><td>  -  </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> 400 Invalid input </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> 500 Internal Server error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> 200 OK </td><td>  -  </td></tr>
      </table>
      */
     public Status getStatus(String ownerId, String flagId, String segment, String key) throws ApiException {
@@ -198,9 +198,9 @@ public class PublicApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 400 </td><td> Invalid input </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal Server error </td><td>  -  </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> 400 Invalid input </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> 500 Internal Server error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> 200 OK </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<Status> getStatusWithHttpInfo(String ownerId, String flagId, String segment, String key) throws ApiException {
@@ -222,9 +222,9 @@ public class PublicApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 400 </td><td> Invalid input </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal Server error </td><td>  -  </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> 400 Invalid input </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> 500 Internal Server error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> 200 OK </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getStatusAsync(String ownerId, String flagId, String segment, String key, final ApiCallback<Status> _callback) throws ApiException {
