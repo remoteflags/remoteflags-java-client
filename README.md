@@ -13,7 +13,7 @@ Remote Flags openapi definition. Public readonly API for integration with Remote
 
 Building the API client library requires:
 1. Java 1.7+
-2. Maven/Gradle
+2. Maven (3.8.3+)/Gradle (7.2+)
 
 ## Installation
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.remoteflags</groupId>
   <artifactId>remoteflags-java-client</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -49,7 +49,14 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.remoteflags:remoteflags-java-client:1.0.0"
+  repositories {
+    mavenCentral()     // Needed if the 'remoteflags-java-client' jar has been published to maven central.
+    mavenLocal()       // Needed if the 'remoteflags-java-client' jar has been published to the local maven repo.
+  }
+
+  dependencies {
+     implementation "com.remoteflags:remoteflags-java-client:1.0.1"
+  }
 ```
 
 ### Others
@@ -62,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/remoteflags-java-client-1.0.0.jar`
+* `target/remoteflags-java-client-1.0.1.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
