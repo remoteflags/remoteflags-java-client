@@ -56,8 +56,16 @@ paths:
         style: form
       responses:
         "400":
+          content:
+            text/plain:
+              schema:
+                type: string
           description: Invalid input
         "500":
+          content:
+            text/plain:
+              schema:
+                type: string
           description: Internal Server error
         "200":
           content:

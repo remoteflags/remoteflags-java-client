@@ -33,6 +33,8 @@ public class Status {
   @SerializedName(SERIALIZED_NAME_VALUE)
   private String value;
 
+  public Status() { 
+  }
 
   public Status value(String value) {
     
