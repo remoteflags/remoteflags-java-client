@@ -57,22 +57,22 @@ paths:
       responses:
         "400":
           content:
-            text/plain:
+            text/html:
               schema:
-                type: string
-          description: Invalid input
+                $ref: '#/components/schemas/Error'
+          description: 400 Invalid input
         "500":
           content:
-            text/plain:
+            text/html:
               schema:
-                type: string
-          description: Internal Server error
+                $ref: '#/components/schemas/Error'
+          description: 500 Internal Server error
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-          description: Ok
+          description: 200 OK
       security:
       - RemoteFlagsAuthorizer: []
       summary: Get a flag status.
@@ -84,6 +84,10 @@ paths:
         responses:
           default:
             statusCode: "200"
+          "400":
+            statusCode: "400"
+          "500":
+            statusCode: "500"
         requestParameters:
           integration.request.querystring.key: method.request.querystring.key
           integration.request.path.ownerId: method.request.path.ownerId
@@ -103,6 +107,8 @@ components:
       required:
       - value
       type: object
+    Error:
+      type: string
   securitySchemes:
     RemoteFlagsAuthorizer:
       in: header
