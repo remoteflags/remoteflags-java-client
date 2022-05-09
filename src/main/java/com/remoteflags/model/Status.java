@@ -43,11 +43,11 @@ public class Status {
   }
 
    /**
-   * Get value
+   * The current flag value as set at remoteflags.com 
    * @return value
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
+  @ApiModelProperty(required = true, value = "The current flag value as set at remoteflags.com ")
 
   public String getValue() {
     return value;
