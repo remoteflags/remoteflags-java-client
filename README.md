@@ -23,7 +23,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.remoteflags</groupId>
   <artifactId>remoteflags-java-client</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.7</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -79,13 +79,19 @@ All URIs are relative to *https://api.remoteflags.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PublicApi* | [**getStatus**](docs/PublicApi.md#getStatus) | **GET** /status/owner/{ownerId}/flag/{flagId} | Get a flag status.
+*PublicApi* | [**getFlagUsage**](docs/PublicApi.md#getFlagUsage) | **GET** /usage/owner/{ownerId}/flag/{flagId} | Get a flag usage data.
+*PublicApi* | [**getOwnerUsage**](docs/PublicApi.md#getOwnerUsage) | **GET** /usage/owner/{ownerId} | Get usage data for an owner.
+ *PublicApi* | [**getStatus**](docs/PublicApi.md#getStatus) | **GET** /status/owner/{ownerId}/flag/{flagId} | Get a flag status.
+*PublicApi* | [**statusOwnerOwnerIdFlagFlagIdOptions**](docs/PublicApi.md#statusOwnerOwnerIdFlagFlagIdOptions) | **OPTIONS** /status/owner/{ownerId}/flag/{flagId} |
+*PublicApi* | [**usageOwnerOwnerIdFlagFlagIdOptions**](docs/PublicApi.md#usageOwnerOwnerIdFlagFlagIdOptions) | **OPTIONS** /usage/owner/{ownerId}/flag/{flagId} |
+*PublicApi* | [**usageOwnerOwnerIdOptions**](docs/PublicApi.md#usageOwnerOwnerIdOptions) | **OPTIONS** /usage/owner/{ownerId} |
 
 
 ## Documentation for Models
 
  - [Status](docs/Status.md)
-
+ - [Usage](docs/Usage.md)
+ - [UsageRequestsPerMonth](docs/UsageRequestsPerMonth.md)
 
 ## Documentation for Authorization
 

@@ -60,19 +60,37 @@ paths:
             text/html:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: 400 Invalid input
+          description: 400 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             text/html:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: 500 Internal Server error
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-          description: 200 OK
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - RemoteFlagsAuthorizer: []
       summary: Get a flag status.
@@ -84,17 +102,369 @@ paths:
         responses:
           default:
             statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
           "400":
             statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
           "500":
             statusCode: "500"
         requestParameters:
-          integration.request.querystring.key: method.request.querystring.key
           integration.request.path.ownerId: method.request.path.ownerId
-          integration.request.querystring.segment: method.request.querystring.segment
           integration.request.path.flagId: method.request.path.flagId
+          integration.request.querystring.key: method.request.querystring.key
+          integration.request.querystring.segment: method.request.querystring.segment
         passthroughBehavior: when_no_match
         type: http
+      x-accepts: application/json
+    options:
+      parameters:
+      - explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Methods:
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Headers:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      tags:
+      - public
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'''
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+        requestTemplates:
+          application/json: '{"statusCode": 200}'
+        passthroughBehavior: when_no_match
+        type: mock
+      x-accepts: application/json
+  /usage/owner/{ownerId}/flag/{flagId}:
+    get:
+      description: Use this operation to get flag usage data from remoteflags.
+      operationId: getFlagUsage
+      parameters:
+      - description: OwnerID to fetch usage for
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: FlagId to fetch usage for
+        explode: false
+        in: path
+        name: flagId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Year to get usage from. If skipped, will get all usage.
+        explode: true
+        in: query
+        name: year
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Month to get usage from. If skipped, will get yearly usage.
+        explode: true
+        in: query
+        name: month
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "400":
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 400 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usage'
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - RemoteFlagsAuthorizer: []
+      summary: Get a flag usage data.
+      tags:
+      - public
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: https://${stageVariables.url}/usage/owner/{ownerId}/flag/{flagId}
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+          "400":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+          "500":
+            statusCode: "500"
+        requestParameters:
+          integration.request.path.ownerId: method.request.path.ownerId
+          integration.request.path.flagId: method.request.path.flagId
+          integration.request.querystring.year: method.request.querystring.year
+          integration.request.querystring.month: method.request.querystring.month
+        passthroughBehavior: when_no_match
+        type: http
+      x-accepts: application/json
+    options:
+      parameters:
+      - explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Methods:
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Headers:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      tags:
+      - public
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'''
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+        requestTemplates:
+          application/json: '{"statusCode": 200}'
+        passthroughBehavior: when_no_match
+        type: mock
+      x-accepts: application/json
+  /usage/owner/{ownerId}:
+    get:
+      description: Use this operation to get owner usage data from remoteflags.
+      operationId: getOwnerUsage
+      parameters:
+      - description: OwnerID to fetch usage for
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Year to get usage from. If skipped, will get all usage.
+        explode: true
+        in: query
+        name: year
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Month to get usage from. If skipped, will get yearly usage.
+        explode: true
+        in: query
+        name: month
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "400":
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 400 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usage'
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - RemoteFlagsAuthorizer: []
+      summary: Get usage data for an owner.
+      tags:
+      - public
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: https://${stageVariables.url}/usage/owner/{ownerId}
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+          "400":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+          "500":
+            statusCode: "500"
+        requestParameters:
+          integration.request.path.ownerId: method.request.path.ownerId
+          integration.request.querystring.year: method.request.querystring.year
+          integration.request.querystring.month: method.request.querystring.month
+        passthroughBehavior: when_no_match
+        type: http
+      x-accepts: application/json
+    options:
+      parameters:
+      - explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Methods:
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Headers:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      tags:
+      - public
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'''
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+        requestTemplates:
+          application/json: '{"statusCode": 200}'
+        passthroughBehavior: when_no_match
+        type: mock
       x-accepts: application/json
 components:
   schemas:
@@ -103,12 +473,57 @@ components:
         value: value
       properties:
         value:
+          description: 'The current flag value as set at remoteflags.com '
           type: string
       required:
       - value
       type: object
+    Usage:
+      example:
+        requestsPerMonth:
+        - month: 1
+          year: 6
+          requests: 5
+        - month: 1
+          year: 6
+          requests: 5
+        requests: 0
+      properties:
+        requests:
+          description: Returned sum of requests
+          format: int64
+          type: integer
+        requestsPerMonth:
+          description: Requests per month
+          items:
+            $ref: '#/components/schemas/Usage_requestsPerMonth'
+          type: array
+      required:
+      - requests
+      - requestsPerMonth
+      type: object
     Error:
       type: string
+    Empty:
+      type: object
+    Usage_requestsPerMonth:
+      example:
+        month: 1
+        year: 6
+        requests: 5
+      properties:
+        year:
+          type: integer
+        month:
+          type: integer
+        requests:
+          format: int64
+          type: integer
+      required:
+      - month
+      - requests
+      - year
+      type: object
   securitySchemes:
     RemoteFlagsAuthorizer:
       in: header
@@ -119,6 +534,16 @@ components:
         type: request
         identitySource: method.request.header.authorizationToken
         authorizerUri: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:LAMBDA_FUNCTION/invocations
-        enableSimpleResponses: true
         authorizerResultTtlInSeconds: 300
+x-amazon-apigateway-gateway-responses:
+  DEFAULT_4XX:
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
+      gatewayresponse.header.Access-Control-Allow-Origin: '''*'''
+      gatewayresponse.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'''
+  DEFAULT_5XX:
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
+      gatewayresponse.header.Access-Control-Allow-Origin: '''*'''
+      gatewayresponse.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'''
 
