@@ -98,7 +98,7 @@ paths:
       - public
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: https://${stageVariables.url}/status/owner/{ownerId}/flag/{flagId}
+        uri: "https://${stageVariables.url}/status/owner/{ownerId}/flag/{flagId}"
         responses:
           default:
             statusCode: "200"
@@ -164,11 +164,131 @@ paths:
           default:
             statusCode: "200"
             responseParameters:
-              method.response.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'''
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'"
               method.response.header.Access-Control-Allow-Origin: '''*'''
         requestTemplates:
-          application/json: '{"statusCode": 200}'
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: when_no_match
+        type: mock
+      x-accepts: application/json
+  /dev-toggle/{id}:
+    get:
+      description: Use this operation to get a flag status from remoteflags for 1
+        click toggle.
+      operationId: get1ClickStatus
+      parameters:
+      - description: Id to fetch status for
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "400":
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 400 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 500 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      summary: Get a flag status for 1 click toggle.
+      tags:
+      - public
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "https://${stageVariables.url}/dev-toggle/{id}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+          "400":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+          "500":
+            statusCode: "500"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+      x-accepts: application/json
+    options:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Methods:
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Headers:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      tags:
+      - public
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Api-Key,X-Amz-Security-Token,user-agent'"
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
         passthroughBehavior: when_no_match
         type: mock
       x-accepts: application/json
@@ -193,21 +313,23 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Year to get usage from. If skipped, will get all usage.
+      - description: "Get usage data starting from this timestamp. If skipped, will\
+          \ default to 30 days ago."
         explode: true
         in: query
-        name: year
+        name: from
         required: false
         schema:
-          type: integer
+          type: string
         style: form
-      - description: Month to get usage from. If skipped, will get yearly usage.
+      - description: "Get usage data ending on this timestamp. If skipped, will default\
+          \ to current date."
         explode: true
         in: query
-        name: month
+        name: to
         required: false
         schema:
-          type: integer
+          type: string
         style: form
       responses:
         "400":
@@ -253,7 +375,7 @@ paths:
       - public
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: https://${stageVariables.url}/usage/owner/{ownerId}/flag/{flagId}
+        uri: "https://${stageVariables.url}/usage/owner/{ownerId}/flag/{flagId}"
         responses:
           default:
             statusCode: "200"
@@ -268,8 +390,8 @@ paths:
         requestParameters:
           integration.request.path.ownerId: method.request.path.ownerId
           integration.request.path.flagId: method.request.path.flagId
-          integration.request.querystring.year: method.request.querystring.year
-          integration.request.querystring.month: method.request.querystring.month
+          integration.request.querystring.from: method.request.querystring.from
+          integration.request.querystring.to: method.request.querystring.to
         passthroughBehavior: when_no_match
         type: http
       x-accepts: application/json
@@ -319,11 +441,11 @@ paths:
           default:
             statusCode: "200"
             responseParameters:
-              method.response.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'''
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'"
               method.response.header.Access-Control-Allow-Origin: '''*'''
         requestTemplates:
-          application/json: '{"statusCode": 200}'
+          application/json: "{\"statusCode\": 200}"
         passthroughBehavior: when_no_match
         type: mock
       x-accepts: application/json
@@ -340,21 +462,23 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Year to get usage from. If skipped, will get all usage.
+      - description: "Get usage data starting from this timestamp. If skipped, will\
+          \ default to 30 days ago."
         explode: true
         in: query
-        name: year
+        name: from
         required: false
         schema:
-          type: integer
+          type: string
         style: form
-      - description: Month to get usage from. If skipped, will get yearly usage.
+      - description: "Get usage data ending on this timestamp. If skipped, will default\
+          \ to current date."
         explode: true
         in: query
-        name: month
+        name: to
         required: false
         schema:
-          type: integer
+          type: string
         style: form
       responses:
         "400":
@@ -400,7 +524,7 @@ paths:
       - public
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: https://${stageVariables.url}/usage/owner/{ownerId}
+        uri: "https://${stageVariables.url}/usage/owner/{ownerId}"
         responses:
           default:
             statusCode: "200"
@@ -414,8 +538,8 @@ paths:
             statusCode: "500"
         requestParameters:
           integration.request.path.ownerId: method.request.path.ownerId
-          integration.request.querystring.year: method.request.querystring.year
-          integration.request.querystring.month: method.request.querystring.month
+          integration.request.querystring.from: method.request.querystring.from
+          integration.request.querystring.to: method.request.querystring.to
         passthroughBehavior: when_no_match
         type: http
       x-accepts: application/json
@@ -458,11 +582,11 @@ paths:
           default:
             statusCode: "200"
             responseParameters:
-              method.response.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'''
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'"
               method.response.header.Access-Control-Allow-Origin: '''*'''
         requestTemplates:
-          application/json: '{"statusCode": 200}'
+          application/json: "{\"statusCode\": 200}"
         passthroughBehavior: when_no_match
         type: mock
       x-accepts: application/json
@@ -480,49 +604,42 @@ components:
       type: object
     Usage:
       example:
-        requestsPerMonth:
-        - month: 1
-          year: 6
-          requests: 5
-        - month: 1
-          year: 6
-          requests: 5
-        requests: 0
+        request:
+        - date: date
+          flagProperties: "{}"
+          flagId: flagId
+        - date: date
+          flagProperties: "{}"
+          flagId: flagId
       properties:
-        requests:
-          description: Returned sum of requests
-          format: int64
-          type: integer
-        requestsPerMonth:
-          description: Requests per month
+        request:
+          description: Array of requests
           items:
-            $ref: '#/components/schemas/Usage_requestsPerMonth'
+            $ref: '#/components/schemas/Usage_request_inner'
           type: array
       required:
-      - requests
-      - requestsPerMonth
+      - request
       type: object
     Error:
       type: string
     Empty:
       type: object
-    Usage_requestsPerMonth:
+    Usage_request_inner:
       example:
-        month: 1
-        year: 6
-        requests: 5
+        date: date
+        flagProperties: "{}"
+        flagId: flagId
       properties:
-        year:
-          type: integer
-        month:
-          type: integer
-        requests:
-          format: int64
-          type: integer
+        flagId:
+          type: string
+        date:
+          type: string
+        flagProperties:
+          type: object
       required:
-      - month
-      - requests
-      - year
+      - date
+      - flagId
+      - flagProperties
       type: object
   securitySchemes:
     RemoteFlagsAuthorizer:
@@ -533,17 +650,17 @@ components:
       x-amazon-apigateway-authorizer:
         type: request
         identitySource: method.request.header.authorizationToken
-        authorizerUri: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:LAMBDA_FUNCTION/invocations
+        authorizerUri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:LAMBDA_FUNCTION/invocations"
         authorizerResultTtlInSeconds: 300
 x-amazon-apigateway-gateway-responses:
   DEFAULT_4XX:
     responseParameters:
-      gatewayresponse.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
+      gatewayresponse.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
       gatewayresponse.header.Access-Control-Allow-Origin: '''*'''
-      gatewayresponse.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'''
+      gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'"
   DEFAULT_5XX:
     responseParameters:
-      gatewayresponse.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
+      gatewayresponse.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
       gatewayresponse.header.Access-Control-Allow-Origin: '''*'''
-      gatewayresponse.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'''
+      gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,user-agent,authorizationtoken'"
 

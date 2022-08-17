@@ -5,10 +5,9 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**requests** | **Long** | Returned sum of requests | 
-**requestsPerMonth** | [**List&lt;UsageRequestsPerMonth&gt;**](UsageRequestsPerMonth.md) | Requests per month | 
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**request** | [**List&lt;UsageRequestInner&gt;**](UsageRequestInner.md) | Array of requests |  |
 
 
 

@@ -12,7 +12,7 @@ For more information on usage checkout our [Docs](https://www.remoteflags.com/do
 ## Requirements
 
 Building the API client library requires:
-1. Java 1.7+
+1. Java 1.8+
 2. Maven (3.8.3+)/Gradle (7.2+)
 
 ### Maven users
@@ -23,7 +23,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.remoteflags</groupId>
   <artifactId>remoteflags-java-client</artifactId>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -38,13 +38,13 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.remoteflags:remoteflags-java-client:1.0.2"
+     implementation "com.remoteflags:remoteflags-java-client:1.0.8"
   }
 ```
 
 ## Getting Started
 
-Please use the following Java code as a template:
+Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
 public class Example {
@@ -77,21 +77,24 @@ public class Example {
 
 All URIs are relative to *https://api.remoteflags.com*
 
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*PublicApi* | [**getFlagUsage**](docs/PublicApi.md#getFlagUsage) | **GET** /usage/owner/{ownerId}/flag/{flagId} | Get a flag usage data.
-*PublicApi* | [**getOwnerUsage**](docs/PublicApi.md#getOwnerUsage) | **GET** /usage/owner/{ownerId} | Get usage data for an owner.
- *PublicApi* | [**getStatus**](docs/PublicApi.md#getStatus) | **GET** /status/owner/{ownerId}/flag/{flagId} | Get a flag status.
-*PublicApi* | [**statusOwnerOwnerIdFlagFlagIdOptions**](docs/PublicApi.md#statusOwnerOwnerIdFlagFlagIdOptions) | **OPTIONS** /status/owner/{ownerId}/flag/{flagId} |
-*PublicApi* | [**usageOwnerOwnerIdFlagFlagIdOptions**](docs/PublicApi.md#usageOwnerOwnerIdFlagFlagIdOptions) | **OPTIONS** /usage/owner/{ownerId}/flag/{flagId} |
-*PublicApi* | [**usageOwnerOwnerIdOptions**](docs/PublicApi.md#usageOwnerOwnerIdOptions) | **OPTIONS** /usage/owner/{ownerId} |
+| Class        | Method | HTTP request | Description|
+|--------------| ------------- | ------------- | -------------|
+| *PublicApi*  | [**devToggleIdOptions**](docs/PublicApi.md#devToggleIdOptions) | **OPTIONS** /dev-toggle/{id} | 
+| *PublicApi*  | [**get1ClickStatus**](docs/PublicApi.md#get1ClickStatus) | **GET** /dev-toggle/{id} | Get a flag status for 1 click toggle.|
+| *PublicApi*  | [**getFlagUsage**](docs/PublicApi.md#getFlagUsage) | **GET** /usage/owner/{ownerId}/flag/{flagId} | Get a flag usage data.|
+| *PublicApi*  | [**getOwnerUsage**](docs/PublicApi.md#getOwnerUsage) | **GET** /usage/owner/{ownerId} | Get usage data for an owner.|
+| *PublicApi*  | [**getStatus**](docs/PublicApi.md#getStatus) | **GET** /status/owner/{ownerId}/flag/{flagId} | Get a flag status.|
+| *PublicApi*  | [**statusOwnerOwnerIdFlagFlagIdOptions**](docs/PublicApi.md#statusOwnerOwnerIdFlagFlagIdOptions) | **OPTIONS** /status/owner/{ownerId}/flag/{flagId} | 
+| *PublicApi*  | [**usageOwnerOwnerIdFlagFlagIdOptions**](docs/PublicApi.md#usageOwnerOwnerIdFlagFlagIdOptions) | **OPTIONS** /usage/owner/{ownerId}/flag/{flagId} | 
+|  *PublicApi* | [**usageOwnerOwnerIdOptions**](docs/PublicApi.md#usageOwnerOwnerIdOptions) | **OPTIONS** /usage/owner/{ownerId} | 
 
 
 ## Documentation for Models
 
  - [Status](docs/Status.md)
  - [Usage](docs/Usage.md)
- - [UsageRequestsPerMonth](docs/UsageRequestsPerMonth.md)
+ - [UsageRequestInner](docs/UsageRequestInner.md)
+
 
 ## Documentation for Authorization
 

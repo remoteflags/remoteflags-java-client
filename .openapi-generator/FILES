@@ -1,3 +1,4 @@
+.github/workflows/maven.yml
 .gitignore
 .travis.yml
 README.md
@@ -7,7 +8,7 @@ build.sbt
 docs/PublicApi.md
 docs/Status.md
 docs/Usage.md
-docs/UsageRequestsPerMonth.md
+docs/UsageRequestInner.md
 git_push.sh
 gradle.properties
 gradle/wrapper/gradle-wrapper.jar
@@ -35,6 +36,8 @@ src/main/java/com/remoteflags/auth/ApiKeyAuth.java
 src/main/java/com/remoteflags/auth/Authentication.java
 src/main/java/com/remoteflags/auth/HttpBasicAuth.java
 src/main/java/com/remoteflags/auth/HttpBearerAuth.java
+src/main/java/com/remoteflags/model/AbstractOpenApiSchema.java
 src/main/java/com/remoteflags/model/Status.java
 src/main/java/com/remoteflags/model/Usage.java
-src/main/java/com/remoteflags/model/UsageRequestsPerMonth.java
+src/main/java/com/remoteflags/model/UsageRequestInner.java
+src/test/java/com/remoteflags/model/UsageRequestInnerTest.java

@@ -20,78 +20,72 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.remoteflags.model.UsageRequestsPerMonth;
+import com.remoteflags.model.UsageRequestInner;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.remoteflags.JSON;
+
 /**
  * Usage
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class Usage {
-  public static final String SERIALIZED_NAME_REQUESTS = "requests";
-  @SerializedName(SERIALIZED_NAME_REQUESTS)
-  private Long requests;
-
-  public static final String SERIALIZED_NAME_REQUESTS_PER_MONTH = "requestsPerMonth";
-  @SerializedName(SERIALIZED_NAME_REQUESTS_PER_MONTH)
-  private List<UsageRequestsPerMonth> requestsPerMonth = new ArrayList<UsageRequestsPerMonth>();
+  public static final String SERIALIZED_NAME_REQUEST = "request";
+  @SerializedName(SERIALIZED_NAME_REQUEST)
+  private List<UsageRequestInner> request = new ArrayList<>();
 
   public Usage() { 
   }
 
-  public Usage requests(Long requests) {
+  public Usage request(List<UsageRequestInner> request) {
     
-    this.requests = requests;
+    this.request = request;
+    return this;
+  }
+
+  public Usage addRequestItem(UsageRequestInner requestItem) {
+    this.request.add(requestItem);
     return this;
   }
 
    /**
-   * Returned sum of requests
-   * @return requests
+   * Array of requests
+   * @return request
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "Returned sum of requests")
+  @ApiModelProperty(required = true, value = "Array of requests")
 
-  public Long getRequests() {
-    return requests;
+  public List<UsageRequestInner> getRequest() {
+    return request;
   }
 
 
-  public void setRequests(Long requests) {
-    this.requests = requests;
+  public void setRequest(List<UsageRequestInner> request) {
+    this.request = request;
   }
 
-
-  public Usage requestsPerMonth(List<UsageRequestsPerMonth> requestsPerMonth) {
-    
-    this.requestsPerMonth = requestsPerMonth;
-    return this;
-  }
-
-  public Usage addRequestsPerMonthItem(UsageRequestsPerMonth requestsPerMonthItem) {
-    this.requestsPerMonth.add(requestsPerMonthItem);
-    return this;
-  }
-
-   /**
-   * Requests per month
-   * @return requestsPerMonth
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "Requests per month")
-
-  public List<UsageRequestsPerMonth> getRequestsPerMonth() {
-    return requestsPerMonth;
-  }
-
-
-  public void setRequestsPerMonth(List<UsageRequestsPerMonth> requestsPerMonth) {
-    this.requestsPerMonth = requestsPerMonth;
-  }
 
 
   @Override
@@ -103,21 +97,19 @@ public class Usage {
       return false;
     }
     Usage usage = (Usage) o;
-    return Objects.equals(this.requests, usage.requests) &&
-        Objects.equals(this.requestsPerMonth, usage.requestsPerMonth);
+    return Objects.equals(this.request, usage.request);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(requests, requestsPerMonth);
+    return Objects.hash(request);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Usage {\n");
-    sb.append("    requests: ").append(toIndentedString(requests)).append("\n");
-    sb.append("    requestsPerMonth: ").append(toIndentedString(requestsPerMonth)).append("\n");
+    sb.append("    request: ").append(toIndentedString(request)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -133,5 +125,110 @@ public class Usage {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("request");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("request");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to Usage
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (Usage.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Usage is not found in the empty JSON string", Usage.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!Usage.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Usage` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : Usage.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      JsonArray jsonArrayrequest = jsonObj.getAsJsonArray("request");
+      if (jsonArrayrequest != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("request").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `request` to be an array in the JSON string but got `%s`", jsonObj.get("request").toString()));
+        }
+
+        // validate the optional field `request` (array)
+        for (int i = 0; i < jsonArrayrequest.size(); i++) {
+          UsageRequestInner.validateJsonObject(jsonArrayrequest.get(i).getAsJsonObject());
+        };
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!Usage.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'Usage' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<Usage> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(Usage.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<Usage>() {
+           @Override
+           public void write(JsonWriter out, Usage value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public Usage read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of Usage given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of Usage
+  * @throws IOException if the JSON string is invalid with respect to Usage
+  */
+  public static Usage fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, Usage.class);
+  }
+
+ /**
+  * Convert an instance of Usage to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

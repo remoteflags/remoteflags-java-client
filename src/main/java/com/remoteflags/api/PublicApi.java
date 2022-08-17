@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class PublicApi {
     private ApiClient localVarApiClient;
@@ -74,11 +75,135 @@ public class PublicApi {
     }
 
     /**
-     * Build call for getFlagUsage
-     * @param ownerId OwnerID to fetch usage for (required)
-     * @param flagId FlagId to fetch usage for (required)
-     * @param year Year to get usage from. If skipped, will get all usage. (optional)
-     * @param month Month to get usage from. If skipped, will get yearly usage. (optional)
+     * Build call for devToggleIdOptions
+     * @param id  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  * Access-Control-Allow-Methods -  <br>  * Access-Control-Allow-Headers -  <br>  </td></tr>
+     </table>
+     */
+    public okhttp3.Call devToggleIdOptionsCall(String id, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/dev-toggle/{id}"
+            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "OPTIONS", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call devToggleIdOptionsValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'id' is set
+        if (id == null) {
+            throw new ApiException("Missing the required parameter 'id' when calling devToggleIdOptions(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = devToggleIdOptionsCall(id, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * 
+     * 
+     * @param id  (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  * Access-Control-Allow-Methods -  <br>  * Access-Control-Allow-Headers -  <br>  </td></tr>
+     </table>
+     */
+    public Object devToggleIdOptions(String id) throws ApiException {
+        ApiResponse<Object> localVarResp = devToggleIdOptionsWithHttpInfo(id);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param id  (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  * Access-Control-Allow-Methods -  <br>  * Access-Control-Allow-Headers -  <br>  </td></tr>
+     </table>
+     */
+    public ApiResponse<Object> devToggleIdOptionsWithHttpInfo(String id) throws ApiException {
+        okhttp3.Call localVarCall = devToggleIdOptionsValidateBeforeCall(id, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param id  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  * Access-Control-Allow-Methods -  <br>  * Access-Control-Allow-Headers -  <br>  </td></tr>
+     </table>
+     */
+    public okhttp3.Call devToggleIdOptionsAsync(String id, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = devToggleIdOptionsValidateBeforeCall(id, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for get1ClickStatus
+     * @param id Id to fetch status for (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -90,9 +215,146 @@ public class PublicApi {
         <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
      </table>
      */
-    public okhttp3.Call getFlagUsageCall(String ownerId, String flagId, Integer year, Integer month, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call get1ClickStatusCall(String id, final ApiCallback _callback) throws ApiException {
         String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
 
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/dev-toggle/{id}"
+            .replaceAll("\\{" + "id" + "\\}", localVarApiClient.escapeString(id.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/html", "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call get1ClickStatusValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'id' is set
+        if (id == null) {
+            throw new ApiException("Missing the required parameter 'id' when calling get1ClickStatus(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = get1ClickStatusCall(id, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * Get a flag status for 1 click toggle.
+     * Use this operation to get a flag status from remoteflags for 1 click toggle.
+     * @param id Id to fetch status for (required)
+     * @return Status
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 400 </td><td> 400 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+        <tr><td> 500 </td><td> 500 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+        <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+     </table>
+     */
+    public Status get1ClickStatus(String id) throws ApiException {
+        ApiResponse<Status> localVarResp = get1ClickStatusWithHttpInfo(id);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get a flag status for 1 click toggle.
+     * Use this operation to get a flag status from remoteflags for 1 click toggle.
+     * @param id Id to fetch status for (required)
+     * @return ApiResponse&lt;Status&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 400 </td><td> 400 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+        <tr><td> 500 </td><td> 500 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+        <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+     </table>
+     */
+    public ApiResponse<Status> get1ClickStatusWithHttpInfo(String id) throws ApiException {
+        okhttp3.Call localVarCall = get1ClickStatusValidateBeforeCall(id, null);
+        Type localVarReturnType = new TypeToken<Status>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get a flag status for 1 click toggle. (asynchronously)
+     * Use this operation to get a flag status from remoteflags for 1 click toggle.
+     * @param id Id to fetch status for (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 400 </td><td> 400 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+        <tr><td> 500 </td><td> 500 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+        <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+     </table>
+     */
+    public okhttp3.Call get1ClickStatusAsync(String id, final ApiCallback<Status> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = get1ClickStatusValidateBeforeCall(id, _callback);
+        Type localVarReturnType = new TypeToken<Status>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getFlagUsage
+     * @param ownerId OwnerID to fetch usage for (required)
+     * @param flagId FlagId to fetch usage for (required)
+     * @param from Get usage data starting from this timestamp. If skipped, will default to 30 days ago. (optional)
+     * @param to Get usage data ending on this timestamp. If skipped, will default to current date. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 400 </td><td> 400 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+        <tr><td> 500 </td><td> 500 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+        <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getFlagUsageCall(String ownerId, String flagId, String from, String to, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
 
@@ -118,12 +380,12 @@ public class PublicApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (year != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("year", year));
+        if (from != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("from", from));
         }
 
-        if (month != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("month", month));
+        if (to != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("to", to));
         }
 
         final String[] localVarAccepts = {
@@ -147,7 +409,7 @@ public class PublicApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getFlagUsageValidateBeforeCall(String ownerId, String flagId, Integer year, Integer month, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getFlagUsageValidateBeforeCall(String ownerId, String flagId, String from, String to, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'ownerId' is set
         if (ownerId == null) {
@@ -160,7 +422,7 @@ public class PublicApi {
         }
         
 
-        okhttp3.Call localVarCall = getFlagUsageCall(ownerId, flagId, year, month, _callback);
+        okhttp3.Call localVarCall = getFlagUsageCall(ownerId, flagId, from, to, _callback);
         return localVarCall;
 
     }
@@ -170,8 +432,8 @@ public class PublicApi {
      * Use this operation to get flag usage data from remoteflags.
      * @param ownerId OwnerID to fetch usage for (required)
      * @param flagId FlagId to fetch usage for (required)
-     * @param year Year to get usage from. If skipped, will get all usage. (optional)
-     * @param month Month to get usage from. If skipped, will get yearly usage. (optional)
+     * @param from Get usage data starting from this timestamp. If skipped, will default to 30 days ago. (optional)
+     * @param to Get usage data ending on this timestamp. If skipped, will default to current date. (optional)
      * @return Usage
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -182,8 +444,8 @@ public class PublicApi {
         <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
      </table>
      */
-    public Usage getFlagUsage(String ownerId, String flagId, Integer year, Integer month) throws ApiException {
-        ApiResponse<Usage> localVarResp = getFlagUsageWithHttpInfo(ownerId, flagId, year, month);
+    public Usage getFlagUsage(String ownerId, String flagId, String from, String to) throws ApiException {
+        ApiResponse<Usage> localVarResp = getFlagUsageWithHttpInfo(ownerId, flagId, from, to);
         return localVarResp.getData();
     }
 
@@ -192,8 +454,8 @@ public class PublicApi {
      * Use this operation to get flag usage data from remoteflags.
      * @param ownerId OwnerID to fetch usage for (required)
      * @param flagId FlagId to fetch usage for (required)
-     * @param year Year to get usage from. If skipped, will get all usage. (optional)
-     * @param month Month to get usage from. If skipped, will get yearly usage. (optional)
+     * @param from Get usage data starting from this timestamp. If skipped, will default to 30 days ago. (optional)
+     * @param to Get usage data ending on this timestamp. If skipped, will default to current date. (optional)
      * @return ApiResponse&lt;Usage&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -204,8 +466,8 @@ public class PublicApi {
         <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
      </table>
      */
-    public ApiResponse<Usage> getFlagUsageWithHttpInfo(String ownerId, String flagId, Integer year, Integer month) throws ApiException {
-        okhttp3.Call localVarCall = getFlagUsageValidateBeforeCall(ownerId, flagId, year, month, null);
+    public ApiResponse<Usage> getFlagUsageWithHttpInfo(String ownerId, String flagId, String from, String to) throws ApiException {
+        okhttp3.Call localVarCall = getFlagUsageValidateBeforeCall(ownerId, flagId, from, to, null);
         Type localVarReturnType = new TypeToken<Usage>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -215,8 +477,8 @@ public class PublicApi {
      * Use this operation to get flag usage data from remoteflags.
      * @param ownerId OwnerID to fetch usage for (required)
      * @param flagId FlagId to fetch usage for (required)
-     * @param year Year to get usage from. If skipped, will get all usage. (optional)
-     * @param month Month to get usage from. If skipped, will get yearly usage. (optional)
+     * @param from Get usage data starting from this timestamp. If skipped, will default to 30 days ago. (optional)
+     * @param to Get usage data ending on this timestamp. If skipped, will default to current date. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -228,9 +490,9 @@ public class PublicApi {
         <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
      </table>
      */
-    public okhttp3.Call getFlagUsageAsync(String ownerId, String flagId, Integer year, Integer month, final ApiCallback<Usage> _callback) throws ApiException {
+    public okhttp3.Call getFlagUsageAsync(String ownerId, String flagId, String from, String to, final ApiCallback<Usage> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getFlagUsageValidateBeforeCall(ownerId, flagId, year, month, _callback);
+        okhttp3.Call localVarCall = getFlagUsageValidateBeforeCall(ownerId, flagId, from, to, _callback);
         Type localVarReturnType = new TypeToken<Usage>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -238,8 +500,8 @@ public class PublicApi {
     /**
      * Build call for getOwnerUsage
      * @param ownerId OwnerID to fetch usage for (required)
-     * @param year Year to get usage from. If skipped, will get all usage. (optional)
-     * @param month Month to get usage from. If skipped, will get yearly usage. (optional)
+     * @param from Get usage data starting from this timestamp. If skipped, will default to 30 days ago. (optional)
+     * @param to Get usage data ending on this timestamp. If skipped, will default to current date. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -251,9 +513,8 @@ public class PublicApi {
         <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
      </table>
      */
-    public okhttp3.Call getOwnerUsageCall(String ownerId, Integer year, Integer month, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getOwnerUsageCall(String ownerId, String from, String to, final ApiCallback _callback) throws ApiException {
         String basePath = null;
-
         // Operation Servers
         String[] localBasePaths = new String[] {  };
 
@@ -278,12 +539,12 @@ public class PublicApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (year != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("year", year));
+        if (from != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("from", from));
         }
 
-        if (month != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("month", month));
+        if (to != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("to", to));
         }
 
         final String[] localVarAccepts = {
@@ -307,7 +568,7 @@ public class PublicApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getOwnerUsageValidateBeforeCall(String ownerId, Integer year, Integer month, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getOwnerUsageValidateBeforeCall(String ownerId, String from, String to, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'ownerId' is set
         if (ownerId == null) {
@@ -315,7 +576,7 @@ public class PublicApi {
         }
         
 
-        okhttp3.Call localVarCall = getOwnerUsageCall(ownerId, year, month, _callback);
+        okhttp3.Call localVarCall = getOwnerUsageCall(ownerId, from, to, _callback);
         return localVarCall;
 
     }
@@ -324,8 +585,8 @@ public class PublicApi {
      * Get usage data for an owner.
      * Use this operation to get owner usage data from remoteflags.
      * @param ownerId OwnerID to fetch usage for (required)
-     * @param year Year to get usage from. If skipped, will get all usage. (optional)
-     * @param month Month to get usage from. If skipped, will get yearly usage. (optional)
+     * @param from Get usage data starting from this timestamp. If skipped, will default to 30 days ago. (optional)
+     * @param to Get usage data ending on this timestamp. If skipped, will default to current date. (optional)
      * @return Usage
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -336,8 +597,8 @@ public class PublicApi {
         <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
      </table>
      */
-    public Usage getOwnerUsage(String ownerId, Integer year, Integer month) throws ApiException {
-        ApiResponse<Usage> localVarResp = getOwnerUsageWithHttpInfo(ownerId, year, month);
+    public Usage getOwnerUsage(String ownerId, String from, String to) throws ApiException {
+        ApiResponse<Usage> localVarResp = getOwnerUsageWithHttpInfo(ownerId, from, to);
         return localVarResp.getData();
     }
 
@@ -345,8 +606,8 @@ public class PublicApi {
      * Get usage data for an owner.
      * Use this operation to get owner usage data from remoteflags.
      * @param ownerId OwnerID to fetch usage for (required)
-     * @param year Year to get usage from. If skipped, will get all usage. (optional)
-     * @param month Month to get usage from. If skipped, will get yearly usage. (optional)
+     * @param from Get usage data starting from this timestamp. If skipped, will default to 30 days ago. (optional)
+     * @param to Get usage data ending on this timestamp. If skipped, will default to current date. (optional)
      * @return ApiResponse&lt;Usage&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -357,8 +618,8 @@ public class PublicApi {
         <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
      </table>
      */
-    public ApiResponse<Usage> getOwnerUsageWithHttpInfo(String ownerId, Integer year, Integer month) throws ApiException {
-        okhttp3.Call localVarCall = getOwnerUsageValidateBeforeCall(ownerId, year, month, null);
+    public ApiResponse<Usage> getOwnerUsageWithHttpInfo(String ownerId, String from, String to) throws ApiException {
+        okhttp3.Call localVarCall = getOwnerUsageValidateBeforeCall(ownerId, from, to, null);
         Type localVarReturnType = new TypeToken<Usage>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -367,8 +628,8 @@ public class PublicApi {
      * Get usage data for an owner. (asynchronously)
      * Use this operation to get owner usage data from remoteflags.
      * @param ownerId OwnerID to fetch usage for (required)
-     * @param year Year to get usage from. If skipped, will get all usage. (optional)
-     * @param month Month to get usage from. If skipped, will get yearly usage. (optional)
+     * @param from Get usage data starting from this timestamp. If skipped, will default to 30 days ago. (optional)
+     * @param to Get usage data ending on this timestamp. If skipped, will default to current date. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -380,9 +641,9 @@ public class PublicApi {
         <tr><td> 200 </td><td> 200 response </td><td>  * Access-Control-Allow-Origin -  <br>  </td></tr>
      </table>
      */
-    public okhttp3.Call getOwnerUsageAsync(String ownerId, Integer year, Integer month, final ApiCallback<Usage> _callback) throws ApiException {
+    public okhttp3.Call getOwnerUsageAsync(String ownerId, String from, String to, final ApiCallback<Usage> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getOwnerUsageValidateBeforeCall(ownerId, year, month, _callback);
+        okhttp3.Call localVarCall = getOwnerUsageValidateBeforeCall(ownerId, from, to, _callback);
         Type localVarReturnType = new TypeToken<Usage>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -406,7 +667,6 @@ public class PublicApi {
      */
     public okhttp3.Call getStatusCall(String ownerId, String flagId, String segment, String key, final ApiCallback _callback) throws ApiException {
         String basePath = null;
-
         // Operation Servers
         String[] localBasePaths = new String[] {  };
 
@@ -564,7 +824,6 @@ public class PublicApi {
      */
     public okhttp3.Call statusOwnerOwnerIdFlagFlagIdOptionsCall(String ownerId, String flagId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
-
         // Operation Servers
         String[] localBasePaths = new String[] {  };
 
@@ -702,7 +961,6 @@ public class PublicApi {
      */
     public okhttp3.Call usageOwnerOwnerIdFlagFlagIdOptionsCall(String ownerId, String flagId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
-
         // Operation Servers
         String[] localBasePaths = new String[] {  };
 
@@ -839,7 +1097,6 @@ public class PublicApi {
      */
     public okhttp3.Call usageOwnerOwnerIdOptionsCall(String ownerId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
-
         // Operation Servers
         String[] localBasePaths = new String[] {  };
 
